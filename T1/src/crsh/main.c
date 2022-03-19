@@ -13,8 +13,17 @@ int main(int argc, char const *argv[])
   {
     printf("Hello World!\n");
   }
+  if (strcmp(input[0], "sum") == 0)
+  {
+    //int a = 0;
+    int a =  input[1] - '0';
+    int b = input[2] - "0";
+    printf("A: %i\n", a);
+    int result = (int)input[1] + (int)input[2];
+    printf("Resultado: %i\n", result);
+  }
   printf("> ");
-  input = read_user_input();
+  //input = read_user_input();
   printf("string: %s\n", input[0]);
   free_user_input(input);
 }
