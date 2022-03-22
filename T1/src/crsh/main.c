@@ -5,9 +5,23 @@
 #include <sys/types.h>
 #include <signal.h>
 #include <unistd.h> 
+#include "data.h"
 
 int main(int argc, char const *argv[])
 {
+  List *lp;  // #1  // SEGUIR MAÑANA
+	lp = (List *) malloc(sizeof(List));  // #1
+
+	initList(lp);  // #1
+
+	addAtTail(lp, 10, "sum", 50);
+  printList(lp);
+	addAtTail(lp,20, "is_prime", 10);
+  printList(lp);
+	addAtTail(lp,30, "hello", 20);
+  printList(lp);
+	addAtTail(lp,40, "crexec", 30);		
+	printList(lp);
   printf("> ");
   char **input = read_user_input();
   printf("> The first argument you wrote was: %s\n", input[0]);
