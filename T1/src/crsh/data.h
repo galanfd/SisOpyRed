@@ -3,7 +3,7 @@ typedef struct process
 {
 	int PID;
     char* name;
-    int time;
+    float time;
 	struct process *  next;
 }Node;
 
@@ -15,6 +15,6 @@ typedef struct
 }List;
 
 void initList(List * lp);
-Node * createNode(int PID, char* name, int time);
-void addAtTail(List * lp, int PID, char* name, int time);
+Node * createNode(int PID, char* name, float time);
+void addAtTail(List * lp, int PID, char* name, float time);
 void printList(List *lp);

@@ -9,7 +9,7 @@ void initList(List * lp)  // Ref: https://www.includehelp.com/ds/singly-linked-l
 	lp->tail = NULL;
 }
 
-Node * createNode(int PID, char* name, int time)
+Node * createNode(int PID, char* name, float time)
 {
 	Node * nNode;
 
@@ -23,7 +23,7 @@ Node * createNode(int PID, char* name, int time)
 	return nNode;
 }
 
-void addAtTail(List * lp, int PID, char* name, int time)
+void addAtTail(List * lp, int PID, char* name, float time)
 {
 	Node * node;
 	node = createNode(PID, name, time);
@@ -48,10 +48,10 @@ void printList(List *lp)
 		return;
 	}
 	node = lp->head;
-	printf("\n| PID | | Time | | Name |\n");  // AJUSTAR AL FINAL
+	printf("\n|  PID  | |   Time   | | Name |\n");  // AJUSTAR AL FINAL
 	while(node != NULL)
 	{
-		printf("| %d | | %d | | %s |\n",node->PID, node->time, node->name);
+		printf("| %d | | %f | | %s |\n",node->PID, node->time, node->name);
 		node = node->next;
 	}
 }
