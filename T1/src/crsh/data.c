@@ -25,7 +25,7 @@ Node * createNode(int PID, char* name, time_t time_s)
 	return nNode;
 }
 
-void addAtTail(List * lp, int PID, char* name, float time)
+void addAtTail(List * lp, int PID, char* name, time_t time)
 {
 	Node * node;
 	node = createNode(PID, name, time);
@@ -63,15 +63,15 @@ void printList(List *lp)
 				time_t time_1, time_2;
       			//int diff_t;
       			time(&time_1);
-      			sleep(2);
+      			//sleep(1);
       			time(&time_2);
-      			printf("segundos: %.2f\n", difftime(time_2, time_1));
+      			//printf("segundos: %.2f\n", difftime(time_2, time_1));
 				time_t end_t;
 				time(&end_t);
-				printf("tiempo inicio: %ld\n", node->time_s);
-				printf("tiempo final: %ld\n", end_t);
-				printf("segundosssssss: %.2f\n", difftime(end_t, node->time_s));
-				printf("| %d | | %.2f | | %s |\n",node->PID, difftime(end_t, node->time_s), node->name);
+				//printf("tiempo inicio: %ld\n", node->time_s);
+				//printf("tiempo final: %ld\n", end_t);
+				//printf("segundosssssss: %.2f\n", difftime(end_t, node->time_s));
+				printf("| %d | |   %.2f   | | %s |\n",node->PID, difftime(end_t, node->time_s), node->name);
 			}
 		}
 		//else{
