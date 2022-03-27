@@ -6,7 +6,6 @@
 #include <signal.h>
 #include <unistd.h> 
 #include "data.h"
-#include "funciones.h"
 
 int main(int argc, char const *argv[])
 {
@@ -31,61 +30,40 @@ int main(int argc, char const *argv[])
     if (strcmp(input[0], "hello") == 0)  // AGREGAR QUE NO VENGAN MÁS ARGUMENTOS(?)
     {
       pid_t pid = fork();
-      helloworld();
-      //printf("Hello World!\n");
+      printf("Hello World!\n");
       kill(pid, SIGKILL);
     }
-
     if (strcmp(input[0], "sum") == 0)
     {
       pid_t pid = fork();
       int NUMBER_1 = atoi(input[1]);  // Ref: https://www.educative.io/edpresso/how-to-convert-a-string-to-an-integer-in-c
       int NUMBER_2 = atoi(input[2]);
-      suma(NUMBER_1, NUMBER_2);
-      //printf("LA SUMA ES: %i\n", NUMBER_1 + NUMBER_2);
+      printf("LA SUMA ES: %i\n", NUMBER_1 + NUMBER_2);
       kill(pid, SIGKILL);
     }
-
     if (strcmp(input[0], "is_prime") == 0)
     {
       pid_t pid = fork();
       int n = atoi(input[1]);
-      primo(n);
+      printf("soy el numero %i\n", n);  // REVISAR ERROR DE MEMORIA
+      int i, flag = 0;  // Ref: https://www.programiz.com/c-programming/examples/prime-number
+      if (n == 0 || n == 1){
+        flag = 1;
+      }
+      for (i = 2; i <= n / 2; ++i) {
+        if (n % i == 0) {
+          flag = 1;
+          break;
+        }
+      }
+      if (flag == 0){
+        printf("%d es un número primo.\n", n);
+      }
+      else{
+        printf("%d NO es un número primo.\n", n);
+      }
       kill(pid, SIGKILL);
     }
-
-
-
-
-    if (strcmp(input[0], "crexec") == 0)
-    {
-      if (strcmp(input[1], "hello") == 0)
-      {
-        pid_t pid = fork();
-        helloworld();
-        kill(pid, SIGKILL);
-      }
-      if (strcmp(input[1], "sum") == 0)
-      {
-        pid_t pid = fork();
-        int NUMBER_1 = atoi(input[2]);  // Ref: https://www.educative.io/edpresso/how-to-convert-a-string-to-an-integer-in-c
-        int NUMBER_2 = atoi(input[3]);
-        suma(NUMBER_1, NUMBER_2);
-        kill(pid, SIGKILL);
-      }
-      if (strcmp(input[1], "is_prime") == 0)
-      {
-        pid_t pid = fork();
-        int n = atoi(input[2]);
-        primo(n);
-        kill(pid, SIGKILL);
-      }
-    }
-
-
-
-
-
     printf("> ");
     input = read_user_input();
   }
