@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "data.h"
+#include <time.h>
 
 
 void initList(List * lp)  // Ref: https://www.includehelp.com/ds/singly-linked-list-implementation-in-c.aspx
@@ -9,7 +10,7 @@ void initList(List * lp)  // Ref: https://www.includehelp.com/ds/singly-linked-l
 	lp->tail = NULL;
 }
 
-Node * createNode(int PID, char* name, float time)
+Node * createNode(int PID, char* name, time_t time_s)
 {
 	Node * nNode;
 
@@ -17,7 +18,8 @@ Node * createNode(int PID, char* name, float time)
 
 	nNode->PID = PID;
     nNode->name = name;
-    nNode->time = time;
+    nNode->time_s = time_s;
+	nNode->time_e = -1;
 	nNode->next = NULL;
 
 	return nNode;
@@ -48,10 +50,54 @@ void printList(List *lp)
 		return;
 	}
 	node = lp->head;
-	printf("\n|  PID  | |   Time   | | Name |\n");  // AJUSTAR AL FINAL
+	printf("\nLIST OF ACTIVE CHILDREN PROCESS OCCURRING\n");
+	printf("\n|  PID  | |  Time(s) | | Name |\n");  // AJUSTAR AL FINAL
 	while(node != NULL)
 	{
-		printf("| %d | | %f | | %s |\n",node->PID, node->time, node->name);
+		//float time;
+		if (node->time_e == -1){
+			int status;
+			if (waitpid(node->PID, &status, WNOHANG) == 0)
+			{
+				//time = ((double)(clock() - node->time_s) / CLOCKS_PER_SEC);  // TIEMPO QUE LLEVA EJECUTANDOSE
+				time_t time_1, time_2;
+      			//int diff_t;
+      			time(&time_1);
+      			sleep(2);
+      			time(&time_2);
+      			printf("segundos: %.2f\n", difftime(time_2, time_1));
+				time_t end_t;
+				time(&end_t);
+				printf("tiempo inicio: %ld\n", node->time_s);
+				printf("tiempo final: %ld\n", end_t);
+				printf("segundosssssss: %.2f\n", difftime(end_t, node->time_s));
+				printf("| %d | | %.2f | | %s |\n",node->PID, difftime(end_t, node->time_s), node->name);
+			}
+		}
+		//else{
+		//	time = ((double)(node->time_e - node->time_s) / CLOCKS_PER_SEC);  // TIEMPO TOTAL SI TERMINÓ
+		//	printf("| %d | | %f | | %s |\n",node->PID, time, node->name);
+		//}
+		node = node->next;
+	}
+}
+
+void fixtime(List *lp, int PID)
+{
+	Node * node;
+	if(lp->head == NULL)
+	{
+		return;
+	}
+	node = lp->head;
+	while(node != NULL)
+	{
+		if (node->PID == PID)
+		{
+			if (node->time_e == -1){
+				node->time_e = clock();
+			}
+		}
 		node = node->next;
 	}
 }
