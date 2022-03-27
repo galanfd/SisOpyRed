@@ -20,15 +20,9 @@ int main(int argc, char const *argv[])
   {
     if (strcmp(input[0], "hello") == 0)  // AGREGAR QUE NO VENGAN MÁS ARGUMENTOS
     {
-      time_t time_1, time_2;
-      //int diff_t;
-      time(&time_1);
-      //sleep(5);
-      //time(&time_2);
-      //printf("segundos: %.2f\n", difftime(time_2, time_1));
-      clock_t start = clock();  // cambiar a segundos
+      time_t time_1;
       pid_t pid = fork();
-      addAtTail(lp, pid, "hello", time_1);
+      addAtTail(lp, pid, "hello", time(&time_1));
       if (pid == -1)
       {
         printf("There's an error while calling");
@@ -36,33 +30,21 @@ int main(int argc, char const *argv[])
       }
       if (pid == 0)
       {
-        //clock_t t = clock();  PREGUNTAR
-        sleep(10);
+        sleep(5);
         printf("Hello World!\n");
-        printf("child id: %i\n", getpid());
-        //double tf = ((double)(clock() - t) / CLOCKS_PER_SEC);
-        //printf("??? %f", tf);
         printf("> ");
         exit(EXIT_SUCCESS);
-        //kill(pid, SIGKILL);
       }
       else
       {
-        //double time_child_process = ((double)(clock() - start) / CLOCKS_PER_SEC);
-        //fixtime(lp, pid);
-        printf("Last process id: %i\n", pid);
-        //printf("Time of last process: %f", time_child_process);
-        //addAtTail(lp, pid, "hello", time_child_process);
         printList(lp);
-        printf("Main process id: %i\n", getpid());
-        printf("Back in the main process\n");
       }
     }
     if (strcmp(input[0], "sum") == 0)  // if str(atoi) == input, continue
     {
-      clock_t start = clock();
+      time_t time_1;
       pid_t pid = fork();
-      addAtTail(lp, pid, "sum", start);
+      addAtTail(lp, pid, "sum", time(&time_1));
       if (pid == -1)
       {
         printf("There's an error while calling");
@@ -72,27 +54,22 @@ int main(int argc, char const *argv[])
       {
         int NUMBER_1 = atoi(input[1]);  // Ref: https://www.educative.io/edpresso/how-to-convert-a-string-to-an-integer-in-c
         int NUMBER_2 = atoi(input[2]);
+        sleep(5);
         int result = NUMBER_1 + NUMBER_2;
         printf("LA SUMA ES: %i\n", result);
         printf("> ");
-        //kill(pid, SIGKILL); dsdsa
         exit(EXIT_SUCCESS);
       }
       else
       {
-        //double time_child_process = ((double)(clock() - start) / CLOCKS_PER_SEC);
-        printf("Last process id: %i\n", pid);
-        //printf("Time of last process: %f", time_child_process);
         printList(lp);
-        printf("Main process id: %i\n", getpid());
-        printf("Back in the main process\n");
       }
     }
     if (strcmp(input[0], "is_prime") == 0)
     {
-      clock_t start = clock();
+      time_t time_1;
       pid_t pid = fork();
-      addAtTail(lp, pid, "is_prime", start);
+      addAtTail(lp, pid, "is_prime", time(&time_1));
       if (pid == -1)
       {
         printf("There's an error while calling");
@@ -100,8 +77,8 @@ int main(int argc, char const *argv[])
       }
       if (pid == 0)
       {
+        sleep(5);
         int n = atoi(input[1]);
-        printf("soy el numero %i\n", n);
         int i, flag = 0;  // Ref: https://www.programiz.com/c-programming/examples/prime-number
         if (n == 0 || n == 1){
           flag = 1;
@@ -123,20 +100,14 @@ int main(int argc, char const *argv[])
       }
       else
       {
-        //double time_child_process = ((double)(clock() - start) / CLOCKS_PER_SEC);
-        printf("Last process id: %i\n", pid);
-        //printf("Time of last process: %f", time_child_process);
         printList(lp);
-        printf("Main process id: %i\n", getpid());
-        printf("Back in the main process\n");
       }
     }
     if (strcmp(input[0], "crlist") == 0)  // AGREGAR QUE NO VENGAN MÁS ARGUMENTOS(?)
     {
-      clock_t start = clock();
+      time_t time_1;
       pid_t pid = fork();
-      addAtTail(lp, pid, "crlist", start);
-      printf("this pid %i\n", pid);  // QUIZÁS AGREGAR A LP ANTES Y LUEGO INVOCAR FUNCIÓN QUE ARREGLE EL TIEMPO 
+      addAtTail(lp, pid, "crlist", time(&time_1));
       if (pid == -1)
       {
         printf("There's an error while calling");
@@ -144,26 +115,18 @@ int main(int argc, char const *argv[])
       }
       if (pid == 0)
       {
-        //clock_t t = clock();  PREGUNTAR
         printList(lp);
-        printf("child id: %i\n", getpid());
-        //double tf = ((double)(clock() - t) / CLOCKS_PER_SEC);
-        //printf("??? %f", tf);
         printf("> ");
         exit(EXIT_SUCCESS);
-        //kill(pid, SIGKILL);
       }
       else
       {
-        //double time_child_process = ((double)(clock() - start) / CLOCKS_PER_SEC);
-        printf("Last process id: %i\n", pid);
-        //printf("Time of last process: %f", time_child_process);
-        //printList(lp);
         printf("Main process id: %i\n", getpid());
         printf("Back in the main process\n");
       }
       // execvp(exe)  1)revisar si el archivo existe (access(nombre_archivo)) 2)despues poner execvp()
     }
+    
     printf("> ");
     input = read_user_input();
   }
