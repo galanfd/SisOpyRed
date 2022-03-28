@@ -16,6 +16,24 @@ void handler(int sig)
   shell = 0;
 }
 
+void freeList(List* lp)
+{
+    Node * node;
+	Node * tmp;
+	if(lp->head == NULL)
+	{
+		return;
+	}
+	node = lp->head;
+    while (node != NULL)
+    {
+       tmp = node;
+       node = node->next;
+       free(tmp);
+    }
+
+}
+
 int main(int argc, char const *argv[])
 {
   signal(SIGINT, handler);
@@ -223,7 +241,7 @@ int main(int argc, char const *argv[])
   //CTRL+C: function handler (le cambia valor a una variable--> que hace continuar (detener) el while)
   // kill despues de un time de 15s
 
-  Node * node;
+    Node * node;
     node = lp->head;
     while(node != NULL)
     {
@@ -244,7 +262,35 @@ int main(int argc, char const *argv[])
         node = node->next;
     }
 
-  wait(15); 
+    //wait(15); 
+
+    int i = 0;
+    while (i < 15)
+    {
+      Node * node;
+      node = lp->head;
+      int checker = 1;
+      while(node != NULL && checker)
+      {
+          //float time;
+          if (node->time_e == -1){
+              int status;
+              if (waitpid(node->PID, &status, WNOHANG) == 0)
+              {
+                  checker = 0;
+                  break;
+              }
+          }
+          
+          node = node->next;
+      }
+      if (checker)
+      {
+        break;
+      }
+      i++;
+      sleep(1);
+    }
 
     node = lp->head;
     while(node != NULL)
@@ -271,3 +317,4 @@ int main(int argc, char const *argv[])
   free(lp);  // agregar función que libere nodos
   free_user_input(input);
 }
+

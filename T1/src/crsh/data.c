@@ -14,7 +14,7 @@ Node * createNode(int PID, char* name, time_t time_s)
 {
 	Node * nNode;
 
-	nNode = (Node *) malloc(sizeof(Node));
+	nNode = (Node *) malloc(sizeof(Node) + 1);
 
 	nNode->PID = PID;
     nNode->name = name;
@@ -92,20 +92,20 @@ void fixtime(List *lp, int PID)
 	}
 }
 
-void freeList(List* lp)
-{
-    Node * node;
-	Node * tmp;
-	if(lp->head == NULL)
-	{
-		return;
-	}
-	node = lp->head;
-    while (node != NULL)
-    {
-       tmp = node;
-       node = node->next;
-       free(tmp);
-    }
-
-}
+//void freeList(List* lp)
+//{
+//    Node * node;
+//	Node * tmp;
+//	if(lp->head == NULL)
+//ss	{
+//		return;
+//	}
+//	node = lp->head;
+//    while (node != NULL)
+//    {
+//       tmp = node;
+//       node = node->next;
+//       free(tmp);
+//    }
+//
+//}
