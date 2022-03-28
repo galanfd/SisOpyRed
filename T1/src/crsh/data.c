@@ -59,18 +59,8 @@ void printList(List *lp)
 			int status;
 			if (waitpid(node->PID, &status, WNOHANG) == 0)
 			{
-				//time = ((double)(clock() - node->time_s) / CLOCKS_PER_SEC);  // TIEMPO QUE LLEVA EJECUTANDOSE
-				time_t time_1, time_2;
-      			//int diff_t;
-      			time(&time_1);
-      			//sleep(1);
-      			time(&time_2);
-      			//printf("segundos: %.2f\n", difftime(time_2, time_1));
 				time_t end_t;
 				time(&end_t);
-				//printf("tiempo inicio: %ld\n", node->time_s);
-				//printf("tiempo final: %ld\n", end_t);
-				//printf("segundosssssss: %.2f\n", difftime(end_t, node->time_s));
 				printf("| %d | |   %.2f   | | %s |\n",node->PID, difftime(end_t, node->time_s), node->name);
 			}
 		}
@@ -100,4 +90,22 @@ void fixtime(List *lp, int PID)
 		}
 		node = node->next;
 	}
+}
+
+void freeList(List* lp)
+{
+    Node * node;
+	Node * tmp;
+	if(lp->head == NULL)
+	{
+		return;
+	}
+	node = lp->head;
+    while (node != NULL)
+    {
+       tmp = node;
+       node = node->next;
+       free(tmp);
+    }
+
 }
