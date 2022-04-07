@@ -19,6 +19,7 @@ typedef struct
 
 void initList(List * lp);
 Node * createNode(int PID, char* name, time_t time);
-void addAtTail(List * lp, int PID, char* name, float time);
+void addAtTail(List * lp, int PID, char* name, time_t time);
 void printList(List *lp);
 void fixtime(List *lp, int PID);
+void freeList(List *lp);
