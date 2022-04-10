@@ -22,7 +22,7 @@ int isEmpty(Queue* queue) {
     return (queue->size == 0);
 }
 
-void enqueue(Queue* queue, int item) {
+void enqueue(Queue* queue, Process* item) {
     if (isFull(queue))
         return;
     queue->rear = (queue->rear + 1) % queue->capacity;
@@ -31,10 +31,10 @@ void enqueue(Queue* queue, int item) {
     printf("%d enqueued to queue\n", item);
 }
 
-int dequeue(Queue* queue) {
-    if (isEmpty(queue))
-        return INT_MIN;
-    int item = queue->data[queue->front];
+Process* dequeue(Queue* queue) {
+    //if (isEmpty(queue))
+    //    return INT_MIN;
+    Process* item = queue->data[queue->front];
     queue->front = (queue->front + 1) % queue->capacity;
     queue->size = queue->size - 1;
     printf("%d dequeued from queue\n", item);
@@ -42,18 +42,18 @@ int dequeue(Queue* queue) {
 }
 
 int front(Queue* queue) {
-    if (isEmpty(queue))
-        return INT_MIN;
+    //if (isEmpty(queue))
+    //    return INT_MIN;
     return queue->data[queue->front];
 }
 
 int rear(Queue* queue) {
-    if (isEmpty(queue))
-        return INT_MIN;
+    //if (isEmpty(queue))
+    //    return INT_MIN;
     return queue->data[queue->rear];
 }
 
-void freeQueue(Queue* queue) {
-    free(queue->data);
-    free(queue);
-}
+//void freeQueue(Queue* queue) {
+//    free(queue->data);
+//    free(queue);
+//}

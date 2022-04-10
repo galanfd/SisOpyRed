@@ -1,4 +1,5 @@
 #pragma once
+#include "../process/process.h"
 
 typedef struct queue {
     int *data;
@@ -10,10 +11,10 @@ typedef struct queue {
 
 
 struct Queue* createQueue(int capacity);
-int isFull(struct Queue* queue);
-int isEmpty(struct Queue* queue);
-void enqueue(struct Queue* queue, int item);
-int dequeue(struct Queue* queue);
-int front(struct Queue* queue);
-int rear(struct Queue* queue);
-void freeQueue(struct Queue* queue);
+int isFull(Queue* queue);
+int isEmpty(Queue* queue);
+void enqueue(Queue* queue, Process* item);
+Process* dequeue(Queue* queue);
+int front(Queue* queue);
+int rear(Queue* queue);
+void freeQueue(Queue* queue);
