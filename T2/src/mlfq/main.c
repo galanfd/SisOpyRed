@@ -11,7 +11,8 @@ int main(int argc, char const *argv[])
 	/*Lectura del input*/
 	char *file_name = (char *)argv[1];
 	InputFile *input_file = read_file(file_name);
-
+	FILE *output_file = fopen(argv[2], "w");
+	int quantum = atoi(argv[3]);
 	/*Mostramos el archivo de input en consola*/
 	printf("Nombre archivo: %s\n", file_name);
 	printf("Cantidad de procesos: %d\n", input_file->len);
@@ -21,11 +22,16 @@ int main(int argc, char const *argv[])
 		for (int j = 0; j < 7; ++j)
 		{
 			printf("%s ", input_file->lines[i][j]); // 0 = name, 1 = pid, 2 = arrival_time, 3 = burst_time, 4 = wait, 5 = waitingtime, 6 = timeTilUpgrade
+			fprintf(output_file, "%s ", input_file->lines[i][j]);
 		}
 		//Process* process = createProcess(atoi(input_file->lines[i][1]), atoi(input_file->lines[i][2]), atoi(input_file->lines[i][3]), &input_file->lines[i][0],
 		//			  0, "READY", atoi(input_file->lines[i][5]), atoi(input_file->lines[i][6]));
+		fprintf(output_file, "\n");
 		printf("\n");
 	}
+	printf("El quantum de esta ejecución es: %d\n", quantum);
+
 
 	input_file_destroy(input_file);
+	fclose(output_file);
 }
