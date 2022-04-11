@@ -57,27 +57,3 @@ Process* rear(Queue* queue) {
         return NULL;
     return &queue->data[queue->rear];
 }
-
-int BestBurst(Queue* queue){  // Función para definir el siguiente proceso a ejecutar en SJF
-    if (isEmpty(queue))
-        return -1;
-    int counter = 0;
-    Process* process = &queue->data[counter];
-    int burst = process->remainingTime;
-    int pos = 0;
-    while (counter < queue->size){
-        process = &queue->data[counter];
-        if (process->remainingTime < burst)
-        {
-            pos = counter;
-            burst = process->remainingTime;
-        }
-        counter++;
-    }
-    return pos;
-}
-
-void freeQueue(Queue* queue) {  // function to free the memory allocated to queue
-    free(queue->data);
-    free(queue);
-}
