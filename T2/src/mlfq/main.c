@@ -20,8 +20,10 @@ int main(int argc, char const *argv[])
 	{
 		for (int j = 0; j < 7; ++j)
 		{
-			printf("%s ", input_file->lines[i][j]);
+			printf("%s ", input_file->lines[i][j]); // 0 = name, 1 = pid, 2 = arrival_time, 3 = burst_time, 4 = wait, 5 = waitingtime, 6 = timeTilUpgrade
 		}
+		//Process* process = createProcess(atoi(input_file->lines[i][1]), atoi(input_file->lines[i][2]), atoi(input_file->lines[i][3]), &input_file->lines[i][0],
+		//			  0, "READY", atoi(input_file->lines[i][5]), atoi(input_file->lines[i][6]));
 		printf("\n");
 	}
 
