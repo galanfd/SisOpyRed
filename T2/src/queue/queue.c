@@ -81,4 +81,3 @@ void freeQueue(Queue* queue) {  // function to free the memory allocated to queu
     free(queue->data);
     free(queue);
 }
-
