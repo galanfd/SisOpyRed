@@ -57,6 +57,20 @@ Process* rear(Queue* queue) {
     return &queue->data[queue->rear];
 }
 
+void BestBurst(Queue* queue){
+    int counter = 0;
+    int burst = queue->data[counter]->remainingTime;
+    int pos = 0;
+    while (counter < queue->size){
+        item = queue->data[counter]
+        if (item->remainingTime < burst):
+            int pos = counter;
+            int burst = item->remainingTime;
+        counter++;
+    return pos;
+    }
+}
+
 //void freeQueue(Queue* queue) {
 //    free(queue->data);
 //    free(queue);
