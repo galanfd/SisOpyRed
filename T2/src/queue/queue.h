@@ -20,3 +20,5 @@ Process* front(Queue* queue);
 Process* rear(Queue* queue);
 int BestBurst(Queue* queue);
 void freeQueue(Queue* queue);
+
+
