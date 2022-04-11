@@ -12,8 +12,14 @@ typedef struct process {
     int endTime;
     int waitingTime;
     int turnaroundTime;
+    int timeTilUpgrade;
 }Process;
 
 
 
-Process* createProcess(int pid, int arrivalTime, int burstTime, char name, int priority, char state_i);
+Process* createProcess(int pid, int arrivalTime, int burstTime, char name[],
+                       int priority, char state_i, int waitingTime, int timeTilUpgrade);
+
+void updateBurstTime(Process* process, int time_used);
+
+void freeProcess(Process* process);

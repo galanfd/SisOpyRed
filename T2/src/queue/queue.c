@@ -6,13 +6,14 @@
 
 int empty = 0;
 
-Queue* createQueue(int capacity) {  // Ref: https://www.geeksforgeeks.org/queue-set-1introduction-and-array-implementation/?ref=lbp
+Queue* createQueue(int capacity, int type) {  // Ref: https://www.geeksforgeeks.org/queue-set-1introduction-and-array-implementation/?ref=lbp
     Queue* queue = (Queue*) malloc(sizeof(Queue));
-    queue->data = malloc(capacity * sizeof(Process));
+    queue->data = malloc(capacity * sizeof(Process)); // array of Processes
     queue->size = 0;
     queue->capacity = capacity;
     queue->front = 0;
     queue->rear = -1;
+    queue->type = type;
     return queue;
 }
 
@@ -52,26 +53,7 @@ Process* front(Queue* queue) {
 }
 
 Process* rear(Queue* queue) {
-    //if (isEmpty(queue))
-    //    return INT_MIN;
+    if (isEmpty(queue))
+        return NULL;
     return &queue->data[queue->rear];
 }
-
-void BestBurst(Queue* queue){
-    int counter = 0;
-    int burst = queue->data[counter]->remainingTime;
-    int pos = 0;
-    while (counter < queue->size){
-        item = queue->data[counter]
-        if (item->remainingTime < burst):
-            int pos = counter;
-            int burst = item->remainingTime;
-        counter++;
-    return pos;
-    }
-}
-
-//void freeQueue(Queue* queue) {
-//    free(queue->data);
-//    free(queue);
-//}
