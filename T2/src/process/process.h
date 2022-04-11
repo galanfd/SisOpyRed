@@ -2,7 +2,7 @@
 
 typedef struct process {
     int pid;
-    char name[32];
+    char* name;
     int priority;
     int state;
     int arrivalTime;
@@ -16,4 +16,4 @@ typedef struct process {
 
 
 
-struct Process* createProcess(int pid, int arrivalTime, int burstTime, char name, int priority, char state_i);
+Process* createProcess(int pid, int arrivalTime, int burstTime, char name, int priority, char state_i);

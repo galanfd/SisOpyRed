@@ -1,11 +1,12 @@
 #include "process.h"
+#include <stdlib.h> // malloc, calloc, free, etc
 
-struct Process* createProcess(int pid, int arrivalTime, int burstTime, char name, int priority, char state_i) {
+Process* createProcess(int pid, int arrivalTime, int burstTime, char name, int priority, char state_i) {
     enum State {READY, RUNNING, WAITING, FINISHED};
     enum State state = state_i;
     Process* process = (Process*) malloc(sizeof(Process));
     process->pid = pid;
-    process->name[32] = name;
+    process->name = &name;
     process->priority = priority;
     process->state = state;
     process->arrivalTime = arrivalTime;

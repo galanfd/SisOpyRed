@@ -3,11 +3,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+
 int empty = 0;
 
-struct Queue* createQueue(int capacity) {  // Ref: https://www.geeksforgeeks.org/queue-set-1introduction-and-array-implementation/?ref=lbp
+Queue* createQueue(int capacity) {  // Ref: https://www.geeksforgeeks.org/queue-set-1introduction-and-array-implementation/?ref=lbp
     Queue* queue = (Queue*) malloc(sizeof(Queue));
-    queue->data = (Process*) malloc(capacity * sizeof(Process));
+    queue->data = malloc(capacity * sizeof(Process));
     queue->size = 0;
     queue->capacity = capacity;
     queue->front = 0;
@@ -29,31 +30,31 @@ void enqueue(Queue* queue, Process* item) {
     if (isFull(queue))
         return;
     queue->rear = (queue->rear + 1) % queue->capacity;
-    queue->data[queue->rear] = item;
+    queue->data[queue->rear] = *item;
     queue->size = queue->size + 1;
     printf("%d enqueued to queue\n", item->pid);
 }
 
 Process* dequeue(Queue* queue) {
     if (isEmpty(queue))
-        return empty;
-    Process* item = queue->data[queue->front];
+        return NULL;
+    Process* item = &queue->data[queue->front];
     queue->front = (queue->front + 1) % queue->capacity;
     queue->size = queue->size - 1;
     printf("%d dequeued from queue\n", item->pid);
     return item;
 }
 
-int front(Queue* queue) {
-    //if (isEmpty(queue))
-    //    return INT_MIN;
-    return queue->data[queue->front];
+Process* front(Queue* queue) {
+    if (isEmpty(queue))
+        return NULL;
+    return &queue->data[queue->front];
 }
 
-int rear(Queue* queue) {
+Process* rear(Queue* queue) {
     //if (isEmpty(queue))
     //    return INT_MIN;
-    return queue->data[queue->rear];
+    return &queue->data[queue->rear];
 }
 
 //void freeQueue(Queue* queue) {
