@@ -18,3 +18,4 @@ Process* dequeue(Queue* queue);
 Process* front(Queue* queue);
 Process* rear(Queue* queue);
 void freeQueue(Queue* queue);
+void BestBurst(Queue* queue;
