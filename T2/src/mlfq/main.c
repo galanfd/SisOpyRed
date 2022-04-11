@@ -4,6 +4,8 @@
 #include "../queue/queue.h"
 #include "../file_manager/manager.h"
 
+// RUN ./mlfq "procesos.txt"
+
 int main(int argc, char const *argv[])
 {
 	/*Lectura del input*/

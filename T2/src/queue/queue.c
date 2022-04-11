@@ -1,6 +1,9 @@
 #include "queue.h"
 #include "../process/process.h"
+#include <stdlib.h>
+#include <stdio.h>
 
+int empty = 0;
 
 struct Queue* createQueue(int capacity) {  // Ref: https://www.geeksforgeeks.org/queue-set-1introduction-and-array-implementation/?ref=lbp
     Queue* queue = (Queue*) malloc(sizeof(Queue));
@@ -28,16 +31,16 @@ void enqueue(Queue* queue, Process* item) {
     queue->rear = (queue->rear + 1) % queue->capacity;
     queue->data[queue->rear] = item;
     queue->size = queue->size + 1;
-    printf("%d enqueued to queue\n", item);
+    printf("%d enqueued to queue\n", item->pid);
 }
 
 Process* dequeue(Queue* queue) {
-    //if (isEmpty(queue))
-    //    return INT_MIN;
+    if (isEmpty(queue))
+        return empty;
     Process* item = queue->data[queue->front];
     queue->front = (queue->front + 1) % queue->capacity;
     queue->size = queue->size - 1;
-    printf("%d dequeued from queue\n", item);
+    printf("%d dequeued from queue\n", item->pid);
     return item;
 }
 
